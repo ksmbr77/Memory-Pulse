@@ -1,4 +1,5 @@
 import { Volume2 } from "lucide-react";
+import doctorImage from "@/assets/doctor-james.png";
 
 const universities = [
   { name: "nature", subtitle: "neuro", bg: "bg-emerald-700" },
@@ -84,19 +85,22 @@ const VSLPage = () => {
 
       {/* Doctor Testimonial Section */}
       <section className="py-12 px-4">
-        <div className="max-w-md mx-auto">
-          <div className="bg-card rounded-xl p-6 text-center border border-border">
+        <div className="max-w-sm mx-auto">
+          <div className="bg-[#1a1f2e] rounded-2xl p-8 text-center border border-[#2a3040]">
             {/* Doctor Avatar */}
-            <div className="relative w-24 h-24 mx-auto mb-4">
-              <div className="w-full h-full rounded-full bg-gradient-to-br from-gray-600 to-gray-800 overflow-hidden border-2 border-border">
+            <div className="relative w-28 h-28 mx-auto mb-5">
+              {/* Outer ring */}
+              <div className="absolute inset-0 rounded-full border-[3px] border-cyan-500/60"></div>
+              {/* Inner image container */}
+              <div className="absolute inset-[6px] rounded-full overflow-hidden bg-gray-800">
                 <img
-                  src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&h=200&fit=crop&crop=face"
+                  src={doctorImage}
                   alt="Dr. James Mendoza"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
               {/* Verified Badge */}
-              <div className="absolute bottom-0 right-0 w-6 h-6 bg-accent rounded-full flex items-center justify-center">
+              <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-7 h-7 bg-cyan-500 rounded-full flex items-center justify-center shadow-lg shadow-cyan-500/30">
                 <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
@@ -104,16 +108,16 @@ const VSLPage = () => {
             </div>
 
             {/* Doctor Info */}
-            <h3 className="text-foreground font-bold text-lg mb-1">DR. JAMES MENDOZA</h3>
-            <p className="text-accent text-sm mb-4">Neurocientífico</p>
+            <h3 className="text-white font-bold text-xl tracking-wide mb-1">DR. JAMES MENDOZA</h3>
+            <p className="text-cyan-400 text-sm mb-6">Neurocientífico</p>
 
-            {/* Quote */}
-            <div className="relative">
-              <span className="text-primary text-3xl font-serif absolute -left-2 -top-2">"</span>
-              <p className="text-muted-foreground italic text-sm px-4">
+            {/* Quote Box */}
+            <div className="relative bg-[#0d1117] rounded-lg p-5">
+              <span className="text-cyan-400 text-3xl font-bold absolute left-3 top-2 leading-none">"</span>
+              <p className="text-gray-300 italic text-sm leading-relaxed px-4">
                 No se trata de hacer más... sino de pensar mejor.
               </p>
-              <span className="text-primary text-3xl font-serif absolute -right-2 -bottom-4">"</span>
+              <span className="text-cyan-400 text-3xl font-bold absolute right-3 bottom-1 leading-none">"</span>
             </div>
           </div>
         </div>
