@@ -2,43 +2,43 @@ import { Volume2 } from "lucide-react";
 import doctorImage from "@/assets/doctor-james.png";
 
 const universities = [
-  { name: "nature", subtitle: "neuro", bg: "bg-emerald-700" },
-  { name: "HARVARD", subtitle: "UNIVERSITY", bg: "bg-red-800" },
-  { name: "COLUMBIA", subtitle: "UNIVERSITY", bg: "bg-blue-800" },
-  { name: "JNeurosci", subtitle: "The Journal", bg: "bg-cyan-700" },
-  { name: "Nalanda", subtitle: "UNIVERSITY", bg: "bg-amber-700" },
+  { name: "nature", subtitle: "neuro", bg: "bg-green-600" },
+  { name: "HARVARD", subtitle: "UNIVERSITY", bg: "bg-red-700" },
+  { name: "COLUMBIA", subtitle: "UNIVERSITY", bg: "bg-blue-700" },
+  { name: "JNeurosci", subtitle: "THE JOURNAL", bg: "bg-cyan-600" },
+  { name: "Nalanda", subtitle: "UNIVERSITY", bg: "bg-orange-500" },
 ];
 
 const VSLPage = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-black">
       {/* Hero Section */}
-      <section className="px-4 py-8 md:py-12">
-        <div className="max-w-2xl mx-auto text-center">
+      <section className="px-4 pt-6 pb-4">
+        <div className="max-w-lg mx-auto text-center">
           {/* Main Headline */}
-          <h1 className="text-2xl md:text-3xl font-bold leading-tight mb-4">
-            <span className="text-foreground">Si Tienes Más de 50 y </span>
-            <span className="text-accent underline decoration-accent">
+          <h1 className="text-xl md:text-2xl font-bold leading-tight mb-3">
+            <span className="text-white">Si Tienes Más de 50 y </span>
+            <span className="text-cyan-400 underline decoration-cyan-400 decoration-2 underline-offset-2">
               Olvidas Nombres o Pierdes las Llaves
             </span>
-            <span className="text-foreground">...</span>
+            <span className="text-white">...</span>
           </h1>
 
           {/* Red Banner */}
-          <div className="bg-primary text-primary-foreground py-3 px-6 rounded-sm mb-4">
-            <p className="text-lg md:text-xl font-bold">
+          <div className="bg-red-600 text-white py-3 px-4 mb-3">
+            <p className="text-base md:text-lg font-bold leading-snug">
               Este Video Podría Salvarte de un Futuro Devastador"
             </p>
           </div>
 
           {/* Subheadline */}
-          <p className="text-muted-foreground text-sm md:text-base mb-8">
-            La causa del deterioro cerebral <span className="underline text-foreground font-semibold">NO ES LA EDAD</span>. Es esto...
+          <p className="text-gray-400 text-sm mb-6">
+            La causa del deterioro cerebral <span className="text-white font-semibold underline">NO ES LA EDAD</span>. Es esto...
           </p>
 
           {/* Video Player Container */}
           <div className="max-w-[400px] mx-auto mb-4">
-            <div className="relative bg-card rounded-lg overflow-hidden border border-border" style={{ paddingTop: '144%' }}>
+            <div className="relative bg-black rounded-md overflow-hidden border border-gray-700" style={{ paddingTop: '144%' }}>
               <iframe
                 src="https://scripts.converteai.net/c769c542-d617-489a-9826-dbd8c5007327/players/6967db5616e3821ec3e1e962/v4/embed.html"
                 frameBorder="0"
@@ -51,11 +51,13 @@ const VSLPage = () => {
           </div>
 
           {/* Audio Notice */}
-          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-            <Volume2 className="w-5 h-5 text-muted-foreground" />
+          <div className="flex items-center justify-center gap-2 text-sm text-gray-400 mb-2">
+            <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center">
+              <Volume2 className="w-4 h-4 text-red-500" />
+            </div>
             <span>
               Quédate hasta el final para{" "}
-              <span className="text-foreground font-semibold">
+              <span className="text-white font-semibold">
                 probar esta revolucionaria tecnología
               </span>
             </span>
@@ -64,19 +66,19 @@ const VSLPage = () => {
       </section>
 
       {/* Scientific References Section */}
-      <section className="bg-secondary py-8 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-foreground font-semibold mb-6 text-sm md:text-base">
+      <section className="bg-gray-100 py-6 px-4">
+        <div className="max-w-lg mx-auto text-center">
+          <h2 className="text-gray-800 font-semibold mb-5 text-sm">
             Referencias Científicas y Estudios Clínicos:
           </h2>
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-2">
             {universities.map((uni, index) => (
               <div
                 key={index}
-                className={`${uni.bg} w-16 h-16 md:w-20 md:h-20 rounded-full flex flex-col items-center justify-center text-white`}
+                className={`${uni.bg} w-14 h-14 md:w-16 md:h-16 rounded-full flex flex-col items-center justify-center text-white shadow-md`}
               >
-                <span className="text-xs md:text-sm font-bold leading-tight">{uni.name}</span>
-                <span className="text-[8px] md:text-[10px] opacity-80">{uni.subtitle}</span>
+                <span className="text-[10px] md:text-xs font-bold leading-tight text-center px-1">{uni.name}</span>
+                <span className="text-[7px] md:text-[8px] opacity-90 uppercase">{uni.subtitle}</span>
               </div>
             ))}
           </div>
@@ -84,7 +86,7 @@ const VSLPage = () => {
       </section>
 
       {/* Doctor Testimonial Section */}
-      <section className="py-12 px-4">
+      <section className="py-10 px-4 bg-black">
         <div className="max-w-sm mx-auto">
           <div className="bg-[#1a1f2e] rounded-2xl p-8 text-center border border-[#2a3040]">
             {/* Doctor Avatar */}
@@ -123,28 +125,31 @@ const VSLPage = () => {
         </div>
       </section>
 
+      {/* Placeholder for Offer Section - Will be added when Vturb video is ready */}
+      {/* This section will include: pricing, CTA button, payment methods, bonuses, FAQ, etc. */}
+
       {/* Footer */}
-      <footer className="py-8 px-4 border-t border-border">
+      <footer className="py-8 px-4 border-t border-gray-800 bg-black">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-foreground text-sm font-medium mb-1">
+          <p className="text-white text-sm font-medium mb-1">
             Copyright 2026 – Memory Pulse ®
           </p>
-          <p className="text-muted-foreground text-xs mb-4">
+          <p className="text-gray-500 text-xs mb-4">
             Todos los Derechos Reservados
           </p>
 
           {/* Links */}
           <div className="flex justify-center gap-6 mb-6">
-            <a href="#" className="text-muted-foreground hover:text-foreground text-xs transition-colors">
+            <a href="#" className="text-gray-500 hover:text-white text-xs transition-colors">
               Términos de Uso
             </a>
-            <a href="#" className="text-muted-foreground hover:text-foreground text-xs transition-colors">
+            <a href="#" className="text-gray-500 hover:text-white text-xs transition-colors">
               Privacidad
             </a>
           </div>
 
           {/* Disclaimer */}
-          <p className="text-muted-foreground text-[10px] leading-relaxed max-w-xl mx-auto">
+          <p className="text-gray-600 text-[10px] leading-relaxed max-w-xl mx-auto">
             Este sitio no forma parte del sitio web de Facebook o de Meta Platforms, Inc. y NO está
             respaldado por Facebook de ninguna manera. Facebook es una marca comercial de Meta
             Platforms, Inc. Queda estrictamente prohibida la reproducción, distribución o modificación
