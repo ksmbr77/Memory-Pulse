@@ -280,7 +280,7 @@ const VSLPage = () => {
           </div>
 
           {/* Audio Notice */}
-          <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-gray-400 mb-2">
+          <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-gray-400 mb-4">
             <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gray-800 flex items-center justify-center">
               <Volume2 className="w-3 h-3 sm:w-4 sm:h-4 text-red-500" />
             </div>
@@ -291,6 +291,50 @@ const VSLPage = () => {
               </span>
             </span>
           </div>
+
+          {/* Offer Section - Shows after 24:50, directly below the audio notice */}
+          {showOffer && (
+            <div className="mt-6 animate-fade-in">
+              {/* Pricing */}
+              <div className="mb-6">
+                <h2 className="text-lg sm:text-xl font-bold mb-3">
+                  <span className="bg-sky-500 text-white px-3 py-1 inline-block rounded">ACCEDE HOY A LA TECNOLOGÍA MEMORY PULSE</span>
+                </h2>
+                <p className="text-cyan-400 text-sm sm:text-base italic mb-2">
+                  <span className="line-through">NORMAL: 169,00 $USD</span>
+                </p>
+                <p className="text-xl sm:text-2xl font-bold mb-2">
+                  <span className="bg-green-500 text-white px-4 py-2 inline-block rounded">HOY: 37,00$USD</span>
+                </p>
+                <p className="text-gray-400 text-sm italic">
+                  Mañana: 49,00$USD
+                </p>
+              </div>
+
+              {/* CTA Button */}
+              <a
+                href={CHECKOUT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-bold text-sm sm:text-base py-3 px-6 sm:px-8 rounded-full shadow-lg shadow-yellow-400/30 transition-all hover:scale-105 animate-pulse"
+              >
+                ¡SÍ, QUIERO RECUPERAR MI AGUDEZA MENTAL!
+              </a>
+
+              {/* Payment Methods */}
+              <div className="flex justify-center items-center gap-2 sm:gap-3 mt-4">
+                <span className="text-white font-bold text-xs sm:text-sm">VISA</span>
+                <div className="w-6 h-4 sm:w-8 sm:h-5 bg-gradient-to-r from-red-500 to-yellow-500 rounded flex items-center justify-center">
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-600 rounded-full opacity-80"></div>
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-400 rounded-full -ml-1 opacity-80"></div>
+                </div>
+                <div className="bg-blue-600 text-white text-[6px] sm:text-[8px] px-1.5 py-0.5 rounded font-bold">
+                  AMEX
+                </div>
+                <span className="text-blue-600 font-bold text-xs sm:text-sm bg-white px-1.5 py-0.5 rounded">PayPal</span>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -349,65 +393,9 @@ const VSLPage = () => {
         </div>
       </section>
 
-      {/* Offer Section - Shows after 24:50 */}
+      {/* Additional Content - Shows after 24:50 */}
       {showOffer && (
         <>
-          {/* Pricing Section */}
-          <section className="py-10 sm:py-16 px-4 bg-black">
-            <div className="max-w-xl mx-auto text-center">
-              {/* Title */}
-              <div className="mb-8">
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">
-                  <span className="bg-sky-500 text-white px-3 py-1 inline-block">ACCEDE HOY A LA TECNOLOGÍA MEMORY PULSE</span>
-                </h2>
-                <p className="bg-sky-500 text-white text-xl sm:text-2xl md:text-3xl font-bold px-3 py-1 mt-1 inline-block">POR:</p>
-              </div>
-
-              {/* Pricing */}
-              <div className="mb-8">
-                <p className="text-cyan-400 text-lg sm:text-xl italic mb-2">
-                  <span className="line-through">NORMAL: 169,00 $USD</span>
-                </p>
-                <p className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
-                  <span className="bg-green-500 text-white px-4 py-2 inline-block">HOY: 37,00$USD</span>
-                </p>
-                <p className="text-gray-400 text-base sm:text-lg italic">
-                  Mañana: 49,00$USD
-                </p>
-              </div>
-
-              {/* CTA Button */}
-              <a
-                href={CHECKOUT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-bold text-base sm:text-lg md:text-xl py-4 px-6 sm:px-10 rounded-full shadow-lg shadow-yellow-400/30 transition-all hover:scale-105 mb-4"
-              >
-                ¡SÍ, QUIERO RECUPERAR MI AGUDEZA MENTAL!
-              </a>
-
-              {/* Add to Cart Link */}
-              <p className="text-cyan-400 underline text-sm sm:text-base mb-6 cursor-pointer hover:text-cyan-300">
-                <a href={CHECKOUT_URL} target="_blank" rel="noopener noreferrer">
-                  Agregar al Carrito
-                </a>
-              </p>
-
-              {/* Payment Methods */}
-              <div className="flex justify-center items-center gap-3 sm:gap-4">
-                <span className="text-white font-bold text-sm sm:text-base">VISA</span>
-                <div className="w-8 h-5 sm:w-10 sm:h-6 bg-gradient-to-r from-red-500 to-yellow-500 rounded flex items-center justify-center">
-                  <div className="w-3 h-3 sm:w-4 sm:h-4 bg-red-600 rounded-full opacity-80"></div>
-                  <div className="w-3 h-3 sm:w-4 sm:h-4 bg-yellow-400 rounded-full -ml-1 sm:-ml-2 opacity-80"></div>
-                </div>
-                <div className="bg-blue-600 text-white text-[8px] sm:text-[10px] px-2 py-1 rounded font-bold">
-                  AMERICAN EXPRESS
-                </div>
-                <span className="text-blue-600 font-bold text-sm sm:text-base bg-white px-2 py-1 rounded">PayPal</span>
-              </div>
-            </div>
-          </section>
-
           {/* What You'll Receive Section */}
           <section className="py-10 sm:py-16 px-4 bg-white">
             <div className="max-w-3xl mx-auto">
