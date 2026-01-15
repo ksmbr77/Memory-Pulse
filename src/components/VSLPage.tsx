@@ -177,11 +177,6 @@ const VSLPage = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // For demo purposes, let's show the offer section
-  useEffect(() => {
-    setShowOffer(true);
-  }, []);
-
   return (
     <div className="min-h-screen bg-black">
       {/* Hero Section */}
