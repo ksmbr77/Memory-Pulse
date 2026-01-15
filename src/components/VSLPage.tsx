@@ -1,6 +1,12 @@
-import { Volume2, Check, ChevronDown, ChevronUp, ThumbsUp, Heart } from "lucide-react";
+import { Volume2, Check, ChevronDown, ChevronUp, ThumbsUp, Heart, X, AlertTriangle } from "lucide-react";
 import doctorImage from "@/assets/doctor-james.png";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const universities = [
   { name: "nature", subtitle: "neuro", bg: "bg-green-600" },
@@ -161,10 +167,26 @@ const OFFER_TIME_SECONDS = 24 * 60 + 50; // 24:50 in seconds
 const VSLPage = () => {
   const [showOffer, setShowOffer] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [showExitPopup, setShowExitPopup] = useState(false);
+  const [hasShownExitPopup, setHasShownExitPopup] = useState(false);
 
+  // Listen to Vturb video time events
   useEffect(() => {
-    // Show offer after 24:50 (for demo, we'll show it immediately or use a timer)
-    // In production, this would listen to Vturb video events
+    const handleMessage = (event: MessageEvent) => {
+      // Vturb sends progress events
+      if (event.data && typeof event.data === 'object') {
+        const { event: eventName, currentTime } = event.data;
+        
+        // Check if video reached 24:50 (1490 seconds)
+        if (currentTime && currentTime >= OFFER_TIME_SECONDS) {
+          setShowOffer(true);
+        }
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+
+    // Fallback timer for 24:50
     const timer = setTimeout(() => {
       setShowOffer(true);
     }, OFFER_TIME_SECONDS * 1000);
@@ -174,8 +196,48 @@ const VSLPage = () => {
       setShowOffer(true);
     }
 
-    return () => clearTimeout(timer);
+    return () => {
+      window.removeEventListener('message', handleMessage);
+      clearTimeout(timer);
+    };
   }, []);
+
+  // Exit intent detection
+  const handleMouseLeave = useCallback((e: MouseEvent) => {
+    if (e.clientY <= 0 && !hasShownExitPopup) {
+      setShowExitPopup(true);
+      setHasShownExitPopup(true);
+    }
+  }, [hasShownExitPopup]);
+
+  // Back button / page visibility detection
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden && !hasShownExitPopup) {
+        setShowExitPopup(true);
+        setHasShownExitPopup(true);
+      }
+    };
+
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (!hasShownExitPopup) {
+        e.preventDefault();
+        e.returnValue = '';
+        setShowExitPopup(true);
+        setHasShownExitPopup(true);
+      }
+    };
+
+    document.addEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [hasShownExitPopup, handleMouseLeave]);
 
   return (
     <div className="min-h-screen bg-black">
@@ -624,6 +686,57 @@ const VSLPage = () => {
           </p>
         </div>
       </footer>
+
+      {/* Exit Intent Popup */}
+      <Dialog open={showExitPopup} onOpenChange={setShowExitPopup}>
+        <DialogContent className="sm:max-w-md bg-gradient-to-b from-gray-900 to-black border-2 border-red-500/50 p-0 overflow-hidden">
+          <div className="relative">
+            {/* Header with warning */}
+            <div className="bg-red-600 py-3 px-4 text-center">
+              <div className="flex items-center justify-center gap-2">
+                <AlertTriangle className="w-5 h-5 sm:w-6 sm:h-6 text-white animate-pulse" />
+                <span className="text-white font-bold text-sm sm:text-base">¡ESPERA!</span>
+                <AlertTriangle className="w-5 h-5 sm:w-6 sm:h-6 text-white animate-pulse" />
+              </div>
+            </div>
+
+            <div className="p-4 sm:p-6 text-center">
+              <h3 className="text-white text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4">
+                ¿Estás seguro de que quieres irte?
+              </h3>
+              
+              <p className="text-gray-300 text-sm sm:text-base mb-4 sm:mb-6 leading-relaxed">
+                El video contiene información <span className="text-yellow-400 font-semibold">crucial</span> que podría cambiar tu vida. 
+                <br className="hidden sm:block" />
+                <span className="text-cyan-400 font-medium">¡No te pierdas la oportunidad!</span>
+              </p>
+
+              <div className="bg-gray-800/50 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6 border border-gray-700">
+                <p className="text-yellow-400 text-xs sm:text-sm font-medium mb-2">
+                  🧠 Miles de personas ya han mejorado su memoria
+                </p>
+                <p className="text-gray-400 text-xs sm:text-sm">
+                  Quédate hasta el final y descubre el secreto de MEMORY PULSE
+                </p>
+              </div>
+
+              <button
+                onClick={() => setShowExitPopup(false)}
+                className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 text-white font-bold text-sm sm:text-base py-3 sm:py-4 px-6 rounded-full shadow-lg shadow-green-500/30 transition-all hover:scale-105 mb-3"
+              >
+                ¡SÍ, QUIERO CONTINUAR VIENDO!
+              </button>
+
+              <button
+                onClick={() => setShowExitPopup(false)}
+                className="text-gray-500 hover:text-gray-400 text-xs sm:text-sm underline transition-colors"
+              >
+                No gracias, prefiero irme
+              </button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
